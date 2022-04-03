@@ -7,7 +7,7 @@ using Test_Wrapper;
 
 namespace usue_online_tests.Tests.List
 {
-    public class Matrix : ITestCreator, ITest
+    public class MulMatrix : ITestCreator, ITest
     {
         public int TestID { get; set; }
         public string Name { get; } = "Умножение матриц на макроуровне";
@@ -15,7 +15,7 @@ namespace usue_online_tests.Tests.List
         public ITest CreateTest(int randomSeed)
         {
             Random random = new Random(randomSeed);
-            Matrix result = new Matrix();
+            MulMatrix result = new MulMatrix();
 
             result.Text = $"Заполните поля для ввода, подбирая значения с помощью «умножение на макроуровне» (по строчкам и столбцам):" +
                           $"\\({random.Next(-5, 5)} * \\begin{{pmatrix}}{random.Next(-5, 5)}\\\\{random.Next(-5, 5)}\\\\{random.Next(-5, 5)}\\end{{pmatrix}} + " +
