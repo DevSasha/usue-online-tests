@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace usue_online_tests.Tests.List
         private int _aCol;
         private Matrix _b0;
         private Matrix _b1;
-        private List<int> _cNums;
+        private int[] _cNums;
         private List<Matrix> _cMatrices;
 
         public ITest CreateTest(int randomSeed)
@@ -44,12 +45,13 @@ namespace usue_online_tests.Tests.List
             _b0 = Matrix.Build(random.Next(2, 4), random.Next(2, 4), random);
             _b1 = Matrix.Build(_b0.GetCols(), random.Next(2, 4), random);
 
-            _cNums = new List<int>();
+            var length = 3;
+            _cNums = new int[length];
             _cMatrices = new List<Matrix>();
-            for (var i = 0; i < 3; ++i)
+            for (var i = 0; i < length; ++i)
             {
                 do
-                    _cNums.Add(random.Next(-10, 11));
+                    _cNums[i] = random.Next(-10, 11);
                 while (_cNums[i] == 0);
                 _cMatrices.Add(Matrix.Build(2, 2, random));
             }
@@ -138,14 +140,14 @@ namespace usue_online_tests.Tests.List
             
             var m = new Matrix(_cMatrices[0].GetSize());
             var ans = new Dictionary<string, int>();
-            for (var i = 0; i < _cNums.Count; i++)
+            for (var i = 0; i < _cNums.Length; i++)
             {
                 m += _cNums[i] * _cMatrices[i];
                 var a = ((i + 1) / m.GetCols() + 1);
                 var b = (i + 3) % m.GetCols() + 1;
                 ans.Add($"c{i}_{a}{b}", _cMatrices[i][a, b]);
             }
-            ans.Add($"c{_cNums.Count}_11", m[1, 1]);
+            ans.Add($"c{_cNums.Length}_11", m[1, 1]);
             right += ans
                 .Where(a => answers.ContainsKey(a.Key) && !string.IsNullOrEmpty(answers[a.Key]))
                 .Count(a => a.Value == Convert.ToInt32(answers[a.Key]));
