@@ -102,12 +102,12 @@ namespace usue_online_tests.Tests.Components
         
         public Matrix GetMinor(int row, int col)
         {
-            var rows = Enumerable.Range(1, GetRows()).Where(i => i != row).ToList();
-            var cols = Enumerable.Range(1, GetCols()).Where(i => i != col).ToList();
+            var rows = Enumerable.Range(1, GetRows()).ToList(); rows.RemoveAt(row - 1);
+            var cols = Enumerable.Range(1, GetCols()).ToList(); cols.RemoveAt(col - 1);
             return GetMinor(rows, cols);
         }
         
-        public Matrix GetMinor(List<int> rows, List<int> cols)
+        public Matrix GetMinor(IReadOnlyList<int> rows, IReadOnlyList<int> cols)
         {
             var result = new Matrix(rows.Count, cols.Count);
 
