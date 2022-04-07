@@ -213,6 +213,16 @@ namespace usue_online_tests.Tests.Components
             return matrix;
         }
         
+        public static Matrix BuildDet1(int size, Random random)
+        {
+            Matrix matrix;
+            do
+                matrix = Build(size, size, random);
+            while (Math.Abs(matrix.Determinant) != 1);
+
+            return matrix;
+        }
+        
         public static int CheckMatrix(Matrix matrix, IReadOnlyDictionary<string, string> answers, string key)
         {
             var right = 0;
