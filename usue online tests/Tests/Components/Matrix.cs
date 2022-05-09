@@ -158,6 +158,36 @@ namespace usue_online_tests.Tests.Components
         public int GetRows() => _size.Item1;
         public int GetCols() => _size.Item2;
 
+        public Matrix GetRow(int i)
+        {
+            var result = new Matrix(1, GetCols());
+            for (var j = 1; j <= GetCols(); j++)
+                result[1, j] = this[i, j];
+
+            return result;
+        }
+        
+        public void SetRow(int i, Matrix row)
+        {
+            for (var j = 1; j <= GetCols(); j++)
+                this[i, j] = row[1, j];
+        }
+        
+        public Matrix GetCol(int i)
+        {
+            var result = new Matrix(GetRows(), 1);
+            for (var j = 1; j <= GetRows(); j++)
+                result[j, 1] = this[j, i];
+
+            return result;
+        }
+        
+        public void SetCol(int i, Matrix col)
+        {
+            for (var j = 1; j <= GetRows(); j++)
+                this[j, i] = col[j, 1];
+        }
+
         public string PrintWithInputs(List<string> skip, string key = "")
         {
             var(cols, rows) = GetSize();
