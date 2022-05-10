@@ -72,10 +72,7 @@ namespace usue_online_tests.Tests.List
             for (var i = 1; i <= a.GetCols(); i++)
             {
                 str.Append($"{a[1, i]:+0;-#}");
-                str.Append(@"\begin{pmatrix}");
-                for (var j = 1; j <= b.GetCols(); j++)
-                    str.Append($"{b[i, j]}&");
-                str.Append(@"\end{pmatrix}");
+                str.Append(b.GetRow(i).Print());
             }
 
             str.Append(" = ");
