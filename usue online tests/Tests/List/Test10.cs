@@ -50,9 +50,7 @@ namespace usue_online_tests.Tests.List
             _cMatrices = new List<Matrix>();
             for (var i = 0; i < length; ++i)
             {
-                do
-                    _cNums[i] = random.Next(-10, 11);
-                while (_cNums[i] == 0);
+                _cNums[i] = random.NonZeroNext(-10, 11);
                 _cMatrices.Add(Matrix.Build(2, 2, random));
             }
         }
