@@ -39,8 +39,8 @@ namespace usue_online_tests.Tests.List
                 _matrix[i, i] = 1;
             
             var kCol = Matrix.Build(_matrix.GetRows(), 1, rnd);
+            kCol[kCol.GetRows(), 1] = 0;
             _matrix.SetCol(_matrix.GetCols(), kCol);
-            _matrix.SetRow(_matrix.GetRows(), _matrix.GetRow(_matrix.GetRows() - 1));
             
             for (var row = 1; row <= _matrix.GetRows() - 1; ++row)
             for (var j = row + 1; j <= _matrix.GetRows() - 1; ++j)
@@ -83,6 +83,7 @@ namespace usue_online_tests.Tests.List
             str.Append(@"\sim");
             str.Append(new MatrixView(_gauss2).SetInputs(_list2).PrintInputs("g2_"));
             str.Append(@"\)");
+            str.Append('\n');
             str.Append(@"\(");
             str.Append("Rg");
             str.Append(new MatrixView(_matrix).Print());
